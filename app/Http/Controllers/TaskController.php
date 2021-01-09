@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 use DB;
 use Carbon\Carbon;
 use App\Models\Service;
@@ -43,8 +45,8 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),[
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
+            'nom' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             
             ]);  
             
@@ -61,7 +63,7 @@ class TaskController extends Controller
         //$service->save();
 
         Service::create([
-            'nom'=> $request['name'],
+            'nom'=> $request['nom'],
             'description' => $request['description'],
         ]);
        
@@ -80,7 +82,7 @@ class TaskController extends Controller
     {
         
         $the_service = Service::where('id', $service_id)->first();
-
+      
 
         return view('service_show',compact('the_service'));
         //redirect('/service_show');
@@ -93,8 +95,9 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {    
         $service = Service::where('id', $id)->first();
+        
         return  view('edit_service', compact('service'));
         
     }
@@ -106,18 +109,25 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
-    {
+    public function update(Request $request)
+    
+    { 
         $this->validate(request(),[
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
+            'nom' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             
             ]);  
+            
         
 
             
-            $service->update($request->all());
-
+            $input = $request->all();
+            $service=Service::find($request['id']);
+            $service->update( $input);
+            
+            Log::info('Showing the service id: ');
+            //$service->fill($input)->update();
+            
          return  
          redirect('/services');
             

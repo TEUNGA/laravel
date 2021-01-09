@@ -9,7 +9,7 @@
     <form method ="post" action ="{{ route('service.store') }}">
     @csrf
     <tr>
-    <td> Nom: <input type="text" name="name" id="name" required>  </td>
+    <td> Nom: <input type="text" name="nom" id="nom" required>  </td>
     <tr>
     <tr> 
     <td> description: <textarea name="description" id="description"></textarea> </td>

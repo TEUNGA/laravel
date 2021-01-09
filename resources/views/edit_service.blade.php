@@ -6,18 +6,19 @@
     <body class="antialiased">
     <p>
     <table>
-    <form method ="post" action ="{{ route('service.edit', $service->name)}}">
+   
+       <form method ="post" action ="{{ route('service.update', $service->id)}}">
     @csrf
-    @method ('Put')
+    
 
     <tr>
-    <td> Nom: <input type="text" name="name" id="name" required>  </td>
+    <td> Nom: <input type="text" name="nom" id="nom" required>  </td>
     <tr>
     <tr> 
     <td> description: <textarea name="description" id="description"></textarea> </td>
     </tr>
     <tr> <td> <button type="submit"  name="edit">Edit</button> </td>
     </tr>
-    </form>
+    </form> 
     </table>
    
