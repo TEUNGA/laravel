@@ -14,21 +14,11 @@
     </ul> 
     
 @endforeach
-
-
-
-
-
-
-
-
-
-
-   
-
-    <a href='/create_service'><input type ="button" value="Add a service"> </a>
+<a href='/create_service'><input type ="button" value="Add a service"> </a>
     </p>
     <a href='/create_class'><input type ="button" value="create new"> </a>
     </p>
-    <a href='/edit_service'><input type ="button" value="Edit service"> </a>
+    <a href='/edit_service/{$id}'><button type ="submit" value="Edit service">
+    Edit service </button>
+     </a>
     </p>

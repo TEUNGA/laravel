@@ -6,7 +6,7 @@
     <body class="antialiased">
     <p>
     <table>
-    <form method ="post" action ="{{ route('service.update') }}">
+    <form method ="post" action ="{{ route('service.edit', $service->name)}}">
     @csrf
     @method ('Put')
 

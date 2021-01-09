@@ -92,9 +92,11 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $service_id)
+    public function edit($id)
     {
-        return  view('edit_service', compact('service_id'));
+        $service = Service::where('id', $id)->first();
+        return  view('edit_service', compact('service'));
+        
     }
 
     /**
@@ -104,22 +106,19 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Service $service)
     {
         $this->validate(request(),[
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
             
             ]);  
-            Service::update([
-                'nom'=> $request['name'],
-                'description' => $request['description'],
-            ]);
+        
 
             
-            //$update($request->all());
+            $service->update($request->all());
 
-         return  //view('update_service');
+         return  
          redirect('/services');
             
     }
